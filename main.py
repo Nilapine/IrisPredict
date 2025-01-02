@@ -49,6 +49,13 @@ page_bg_img = """
     transition: background-color 0.3s ease;
 }
 
+.stButton button {
+            background-color: white;
+            color: w#6c4891;
+            border-radius: 10px;
+            hover : black;
+        }
+
 .sidebar-button:hover {
     background-color: #6c4891;  /* Warna tombol saat di-hover */
 }
@@ -83,23 +90,38 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Membuat sidebar dengan tombol menu berbentuk kotak
 with st.sidebar:
+    # Simpan status tombol di session_state
+    if 'active_tab' not in st.session_state:
+        st.session_state.active_tab = "Home" #default home
+
     # Tombol navigasi dengan kondisi untuk menandakan klik
     button_home = st.button("Home", key="home", help="Halaman utama", use_container_width=True)
     button_predict = st.button("Prediction", key="predict", help="Prediksi data", use_container_width=True)
     button_visualize = st.button("Visualisation", key="visualise", help="Visualisasi data", use_container_width=True)
 
+    # Simpan tab yang dipilih di session_state
+    if button_home:
+        st.session_state.active_tab = "Home"
+    elif button_predict:
+        st.session_state.active_tab = "Prediction"
+    elif button_visualize:
+        st.session_state.active_tab = "Visualisation"
+
 # Load dataset
 df, x, y = load_data()
 
 # Menambahkan logika untuk menangani status tombol yang diklik
-if button_home:
-    st.markdown('<style>.sidebar-button { background-color: #6c4891 !important; }</style>', unsafe_allow_html=True)
+# Mengubah tombol yang aktif dengan kelas CSS yang sesuai
+for tab in Tabs.keys():
+    if st.session_state.active_tab == tab:
+        st.markdown(f'<style>.sidebar-button#{tab} {{ background-color: #6c4891 !important; }}</style>', unsafe_allow_html=True)
+
+# Tampilkan page sesuai tab yang dipilih
+if st.session_state.active_tab == "Home":
     Tabs["Home"].app(df, x, y)
-elif button_predict:
-    st.markdown('<style>.sidebar-button { background-color: #6c4891 !important; }</style>', unsafe_allow_html=True)
+elif st.session_state.active_tab == "Prediction":
     Tabs["Prediction"].app(df, x, y)
-elif button_visualize:
-    st.markdown('<style>.sidebar-button { background-color: #6c4891 !important; }</style>', unsafe_allow_html=True)
+elif st.session_state.active_tab == "Visualisation":
     Tabs["Visualisation"].app(df, x, y)
 
 # Footer
