@@ -21,7 +21,7 @@ def app(df, x, y):
     # elif st.checkbox("Pairplot"):
     st.markdown("""
     <p style="text-align: justify;">
-    Klasifikasi menggunakan Decision Tree dari scikit-learn telah dilatih pada suatu dataset (diasumsikan X_train dan y_train) dan dievaluasi pada set data uji (X_test, y_test). 
+    Klasifikasi menggunakan Naive Bayes telah dilatih pada suatu dataset (diasumsikan X_train dan y_train) dan dievaluasi pada set data uji (X_test, y_test). 
     Skor akurasi yang dicapai pada set data uji adalah 0,966%, yang tinggi dan menunjukkan bahwa model ini tampil dengan baik pada data yang diberikan. 
     <br><br>
     Visualisasi Pair plot:
