@@ -10,8 +10,7 @@ from web_functions import train_model_DT, train_model_KNN, train_model_NBC, load
 def app(df, x, y):
     warnings.filterwarnings('ignore')
     #st.set_option('deprecation.showPyplotGlobalUse', False)
-    st.title("Visualisasi Prediksi Tanaman Iris")
-
+    st.markdown('<h1 class="title">Visualisasi Prediksi Tanaman Iris</h1>', unsafe_allow_html=True)
     # if st.checkbox("Plot Decision Tree"):
     #     model, score = train_model_DT(x, y)
     #     dot_data = tree.export_graphviz(
@@ -20,7 +19,15 @@ def app(df, x, y):
     #     )
     #     st.graphviz_chart(dot_data)
     # elif st.checkbox("Pairplot"):
-    st.title("Pair plot")
+    st.markdown("""
+    <p style="text-align: justify;">
+    Klasifikasi menggunakan Decision Tree dari scikit-learn telah dilatih pada suatu dataset (diasumsikan X_train dan y_train) dan dievaluasi pada set data uji (X_test, y_test). 
+    Skor akurasi yang dicapai pada set data uji adalah 0,966%, yang tinggi dan menunjukkan bahwa model ini tampil dengan baik pada data yang diberikan. 
+    <br><br>
+    Visualisasi Pair plot:
+    </p>
+    """, 
+    unsafe_allow_html=True)
     # s = sns.pairplot(df, hue="Species")
     st.pyplot(sns.pairplot(df, hue="Species"))  # type: ignore
 
@@ -29,6 +36,10 @@ def app(df, x, y):
     <style>
         [data-testid="stExpander"]{
             color: #800080;  /* Purple text color */
+        }
+        .title {
+            text-align: center;
+            color: purple;
         }
     </style>
     """, unsafe_allow_html=True)

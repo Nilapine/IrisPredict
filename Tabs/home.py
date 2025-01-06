@@ -3,7 +3,7 @@ from web_functions import load_data
 from Tabs import home, predict, visualise  # Pastikan file/folder Tabs tersedia
 
 def app(df, x, y):
-    # Custom HTML for title with purple color, centered alignment, larger background image, blur effect, and button inside the image
+    # Custom HTML for title with purple color, centered alignment, larger background image, blur effect, and positioned at the top
     st.markdown(
         """
         <style>
@@ -12,11 +12,14 @@ def app(df, x, y):
                 text-align: center;
                 color: white;
                 background-image: url("https://agrokomplekskita.com/wp-content/uploads/2018/01/BUNGA-IRIS.jpg");
-                padding: 100px;
+                padding: 50px 20px;
                 font-size: 3rem;
                 background-size: cover;
-                background-position: left;
+                background-position: center;
                 border-radius: 10px;
+                margin-bottom: 20px; /* Add some spacing below the title */
+                margin-top: -70px; /* Pull the title towards the top of the page */
+                z-index: 1; /* Ensure the title is visible at the top */
             }
             .title-container::before {
                 content: '';
@@ -26,27 +29,14 @@ def app(df, x, y):
                 width: 100%;
                 height: 100%;
                 background-image: inherit;
-                filter: blur(2px); /* Apply blur to the background only */
-                z-index: 0; /* Ensure the blurred background is behind text and button */
+                filter: blur(4px); /* Apply a slight blur to the background */
+                z-index: 0; /* Ensure the blurred background is behind text */
                 border-radius: inherit; /* Make sure the background has rounded corners */
             }
             .title-container h1 {
                 position: relative;
-                z-index: 1; /* Make sure text is above the blurred background */
-            }
-            .start-button {
-                position: absolute;
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                padding: 10px 20px;
-                font-size: 1.2rem;
-                background-color: #800080;
-                color: white;
-                border: none;
-                border-radius: 15px;
-                cursor: pointer;
-                z-index: 1; /* Keep button above the blurred background */
+                z-index: 1; /* Ensure the text is above the blurred background */
+                color: #800080; /* Purple text color */
             }
         </style>
         <div class="title-container">
